@@ -4,10 +4,10 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 export default function Home() {
-  const [bill, setBill] = useState<string>('142.55');
-  const [tipPercentage, setTipPercentage] = useState<number | null>(15);
+  const [bill, setBill] = useState<string>('');
+  const [tipPercentage, setTipPercentage] = useState<number | null>(null);
   const [customTip, setCustomTip] = useState<string>('');
-  const [numberOfPeople, setNumberOfPeople] = useState<string>('5');
+  const [numberOfPeople, setNumberOfPeople] = useState<string>('');
 
   const tipPercentages = [5, 10, 15, 25, 50];
 
@@ -50,21 +50,14 @@ export default function Home() {
   const isResetDisabled = !bill && !tipPercentage && !customTip && !numberOfPeople;
 
   return (
-    <div className="min-h-screen bg-light-grayish-cyan flex flex-col items-center justify-center p-6 font-space-mono">
-      {/* Logo */}
-      <div className="mb-10">
-        <h1 className="text-2xl font-bold text-very-dark-cyan tracking-[0.4em] text-center leading-[1.2]">
-          S P L I<br />
-          T T E R
-        </h1>
-      </div>
+    <div className="min-h-screen bg-light-grayish-cyan flex items-center justify-center p-6 font-space-mono">
+      {/* Main Container - Compact design matching the new image */}
+      <div className="bg-white rounded-3xl p-6 w-full max-w-[850px] shadow-2xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-      {/* Calculator Card */}
-      <div className="bg-white rounded-3xl p-8 w-full max-w-[920px] shadow-xl">
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Left Side - Input Section */}
-          <div className="space-y-8">
-            {/* Bill Input */}
+          {/* Left Container - Input Section */}
+          <div className="space-y-6">
+            {/* Bill Input Container */}
             <div>
               <label className="block text-dark-grayish-cyan text-base font-bold mb-2">
                 Bill
@@ -72,34 +65,34 @@ export default function Home() {
               <div className="relative">
                 <Image
                   src="/images/icon-dollar.svg"
-                  alt="Dollar icon"
-                  width={16}
-                  height={16}
-                  className="absolute left-5 top-1/2 transform -translate-y-1/2 z-10"
+                  alt="Dollar"
+                  width={20}
+                  height={20}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2"
                 />
                 <input
                   type="number"
                   value={bill}
                   onChange={(e) => setBill(e.target.value)}
-                  className="w-full bg-very-light-grayish-cyan text-right text-input text-very-dark-cyan font-bold px-5 py-4 pl-14 rounded-lg border-2 border-transparent focus:border-strong-cyan focus:outline-none placeholder-grayish-cyan"
+                  className="w-full bg-very-light-grayish-cyan text-right text-2xl text-very-dark-cyan font-bold px-4 py-3 pl-12 rounded-lg border-2 border-transparent focus:border-strong-cyan focus:outline-none hover:border-strong-cyan cursor-pointer"
                   placeholder="0"
                 />
               </div>
             </div>
 
-            {/* Tip Selection */}
+            {/* Tip Selection Container */}
             <div>
-              <label className="block text-dark-grayish-cyan text-base font-bold mb-4">
+              <label className="block text-dark-grayish-cyan text-base font-bold mb-3">
                 Select Tip %
               </label>
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
                 {tipPercentages.map((percentage) => (
                   <button
                     key={percentage}
                     onClick={() => handleTipSelection(percentage)}
-                    className={`py-3 px-6 rounded-lg font-bold text-input transition-all duration-200 ${tipPercentage === percentage
-                      ? 'bg-strong-cyan text-very-dark-cyan'
-                      : 'bg-very-dark-cyan text-white hover:bg-strong-cyan hover:text-very-dark-cyan'
+                    className={`py-3 px-4 rounded-lg font-bold text-xl transition-colors min-h-[50px] ${tipPercentage === percentage
+                        ? 'bg-strong-cyan text-very-dark-cyan'
+                        : 'bg-very-dark-cyan text-white hover:bg-strong-cyan hover:text-very-dark-cyan'
                       }`}
                   >
                     {percentage}%
@@ -109,13 +102,13 @@ export default function Home() {
                   type="number"
                   value={customTip}
                   onChange={(e) => handleCustomTip(e.target.value)}
-                  className="bg-very-light-grayish-cyan text-center text-input text-very-dark-cyan font-bold py-3 px-6 rounded-lg border-2 border-transparent focus:border-strong-cyan focus:outline-none placeholder-grayish-cyan"
+                  className="bg-very-light-grayish-cyan text-center text-xl text-very-dark-cyan font-bold py-3 px-4 rounded-lg border-2 border-transparent focus:border-strong-cyan focus:outline-none placeholder-grayish-cyan hover:border-strong-cyan cursor-pointer min-h-[50px]"
                   placeholder="Custom"
                 />
               </div>
             </div>
 
-            {/* Number of People */}
+            {/* Number of People Container */}
             <div>
               <label className="block text-dark-grayish-cyan text-base font-bold mb-2">
                 Number of People
@@ -123,43 +116,43 @@ export default function Home() {
               <div className="relative">
                 <Image
                   src="/images/icon-person.svg"
-                  alt="Person icon"
-                  width={16}
-                  height={16}
-                  className="absolute left-5 top-1/2 transform -translate-y-1/2 z-10"
+                  alt="Person"
+                  width={20}
+                  height={20}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2"
                 />
                 <input
                   type="number"
                   value={numberOfPeople}
                   onChange={(e) => setNumberOfPeople(e.target.value)}
-                  className="w-full bg-very-light-grayish-cyan text-right text-input text-very-dark-cyan font-bold px-5 py-4 pl-14 rounded-lg border-2 border-transparent focus:border-strong-cyan focus:outline-none placeholder-grayish-cyan"
+                  className="w-full bg-very-light-grayish-cyan text-right text-2xl text-very-dark-cyan font-bold px-4 py-3 pl-12 rounded-lg border-2 border-transparent focus:border-strong-cyan focus:outline-none hover:border-strong-cyan cursor-pointer"
                   placeholder="0"
                 />
               </div>
             </div>
           </div>
 
-          {/* Right Side - Results Section */}
-          <div className="bg-very-dark-cyan rounded-2xl p-8 flex flex-col justify-between min-h-[416px]">
-            <div className="space-y-10">
-              {/* Tip Amount */}
+          {/* Right Container - Results Panel */}
+          <div className="bg-very-dark-cyan rounded-2xl p-6 flex flex-col justify-between min-h-[350px]">
+            <div className="space-y-8">
+              {/* Tip Amount Display */}
               <div className="flex justify-between items-center">
                 <div>
                   <div className="text-white text-base font-bold">Tip Amount</div>
                   <div className="text-grayish-cyan text-sm">/ person</div>
                 </div>
-                <div className="text-strong-cyan text-5xl font-bold">
+                <div className="text-strong-cyan text-4xl font-bold">
                   ${calculateTipAmount().toFixed(2)}
                 </div>
               </div>
 
-              {/* Total */}
+              {/* Total Display */}
               <div className="flex justify-between items-center">
                 <div>
                   <div className="text-white text-base font-bold">Total</div>
                   <div className="text-grayish-cyan text-sm">/ person</div>
                 </div>
-                <div className="text-strong-cyan text-5xl font-bold">
+                <div className="text-strong-cyan text-4xl font-bold">
                   ${calculateTotal().toFixed(2)}
                 </div>
               </div>
@@ -169,9 +162,9 @@ export default function Home() {
             <button
               onClick={handleReset}
               disabled={isResetDisabled}
-              className={`w-full font-bold py-4 rounded-lg mt-10 transition-all duration-200 uppercase tracking-[0.1em] text-lg ${isResetDisabled
-                ? 'bg-very-dark-cyan text-grayish-cyan cursor-not-allowed opacity-50'
-                : 'bg-strong-cyan text-very-dark-cyan hover:bg-strong-cyan/80'
+              className={`w-full font-bold py-3 rounded-lg mt-6 transition-colors uppercase tracking-wider text-lg ${isResetDisabled
+                  ? 'bg-very-dark-cyan text-grayish-cyan cursor-not-allowed opacity-30'
+                  : 'bg-strong-cyan text-very-dark-cyan hover:bg-[hsl(172,67%,65%)]'
                 }`}
             >
               RESET
